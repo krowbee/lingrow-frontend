@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -28,7 +28,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const {
     control,
-    register,
+
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
