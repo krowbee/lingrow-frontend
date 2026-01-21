@@ -17,10 +17,12 @@ export const InfoCard = ({
 }): React.ReactNode => {
   return (
     <Card
-      className={`w-[375px] h-[280px] max-w-sm bg-neutral-800 border rounded-sm ${cardColor.border}`}
+      className={`w-[375px] h-[280px] max-w-sm bg-neutral-800 border rounded-sm ${cardColor.border} border-white!`}
     >
       <CardHeader>
-        <CardTitle className={`${cardColor.text} text-lg font-heading`}>
+        <CardTitle
+          className={`${cardColor.text} text-white! text-lg font-heading`}
+        >
           {cardTitle}
         </CardTitle>
         <CardDescription className="text-lg text-neutral-400 font-body">

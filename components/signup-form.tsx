@@ -47,7 +47,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card
       {...props}
-      className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full justify-center"
+      className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full md:h-min justify-center"
     >
       <CardHeader>
         <CardTitle className="text-white font-heading">

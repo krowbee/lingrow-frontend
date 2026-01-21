@@ -44,8 +44,11 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex flex-col gap-6 h-full", className)} {...props}>
-      <Card className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full justify-center">
+    <div
+      className={cn("flex flex-col gap-6 h-full justify-center", className)}
+      {...props}
+    >
+      <Card className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full md:h-min justify-center">
         <CardHeader>
           <CardTitle className="text-white font-heading">
             Вхід в обліковий запис
