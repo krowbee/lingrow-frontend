@@ -9,5 +9,6 @@ export async function fetchWithoutRefresh(
       ...(options.headers ?? {}),
     },
   };
+  console.log("request sent");
   return fetch(url, opts);
 }

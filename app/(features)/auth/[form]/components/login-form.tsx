@@ -26,13 +26,15 @@ import {
 } from "../../../../../components/schemas/authSchemas";
 import { ErrorMessage } from "../../../../../components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
+import { loginOnServer } from "@/lib/api/requests/auth.requests";
+import { useAuthStore } from "../../../../../store/AuthStore";
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const {
     control,
-
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
@@ -43,8 +45,17 @@ export function LoginForm({
     resolver: zodResolver(LoginSchema),
   });
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    console.log(data);
+  const login = useAuthStore((state) => state.login);
+
+  const onSubmit = async (data: LoginFormData) => {
+    const result = await loginOnServer(data);
+    if (!result.ok) {
+      setError("root", { message: result.error });
+      return;
+    }
+    login(result.data);
+    console.log("Loggined in");
+    console.log(result.data);
   };
 
   return (
@@ -123,6 +134,7 @@ export function LoginForm({
               {errors.password && (
                 <ErrorMessage message={errors.password.message} />
               )}
+              {errors.root && <ErrorMessage message={errors.root.message} />}
               <Field>
                 <Button type="submit" className="cursor-pointer">
                   Увійти

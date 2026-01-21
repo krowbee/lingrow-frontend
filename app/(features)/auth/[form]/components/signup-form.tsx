@@ -24,10 +24,12 @@ import {
 } from "../../../../../components/schemas/authSchemas";
 import { ErrorMessage } from "../../../../../components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
+import { registerOnServer } from "@/lib/api/requests/auth.requests";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const {
     control,
+    setError,
     formState: { errors },
     handleSubmit,
   } = useForm<RegisterFormData>({
@@ -35,17 +37,18 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     resolver: zodResolver(RegisterSchema),
   });
 
-  const onSubmit = (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    console.log(data);
+  const onSubmit = async (data: RegisterFormData) => {
+    const result = await registerOnServer(data);
+    if (!result.ok) {
+      setError("root", { message: result.error });
+      return;
+    }
+    console.log("Signed up");
+    console.log(result.data);
   };
 
   return (
@@ -139,40 +142,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 Мінімальна довжина паролю - 8 символів
               </FieldDescription>
             </Field>
-            <Field>
-              <FieldLabel
-                htmlFor="confirm-password"
-                className="text-white font-heading"
-              >
-                Підтвердити пароль
-              </FieldLabel>
-              <Controller
-                name="confirmPassword"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    id="confirm-password"
-                    type="password"
-                    required
-                    className="text-white border-purple-500"
-                    {...field}
-                  />
-                )}
-              />
 
-              <FieldDescription className="font-body">
-                Будь ласка підтвердіть ваш пароль
-              </FieldDescription>
-            </Field>
             <FieldGroup>
-              {errors.password || errors.confirmPassword ? (
-                <ErrorMessage
-                  message={
-                    errors.password?.message || errors.confirmPassword?.message
-                  }
-                />
+              {errors.password ? (
+                <ErrorMessage message={errors.password?.message} />
               ) : (
-                ""
+                errors.root && <ErrorMessage message={errors.root.message} />
               )}
               <Field>
                 <Button type="submit" className="cursor-pointer">

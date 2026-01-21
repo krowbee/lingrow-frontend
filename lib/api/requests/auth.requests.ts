@@ -7,7 +7,9 @@ import { API_URL } from "../constants";
 import { ApiResult } from "@/types/api/api-result.type";
 import { User } from "@/types/auth/user";
 
-export async function login(formData: LoginFormData): Promise<ApiResult<User>> {
+export async function loginOnServer(
+  formData: LoginFormData
+): Promise<ApiResult<User>> {
   const res = await fetchWithoutRefresh(`${API_URL}/auth/login`, {
     method: "POST",
     body: JSON.stringify(formData),
@@ -20,7 +22,7 @@ export async function login(formData: LoginFormData): Promise<ApiResult<User>> {
   return { ok: true, data: await res.json() };
 }
 
-export async function register(
+export async function registerOnServer(
   formData: RegisterFormData
 ): Promise<ApiResult<User>> {
   const res = await fetchWithoutRefresh(`${API_URL}/auth/register`, {
@@ -35,7 +37,7 @@ export async function register(
   return { ok: true, data: await res.json() };
 }
 
-export async function logout() {
+export async function logoutOnServer() {
   return await fetchWithoutRefresh(`${API_URL}/auth/logout`, {
     method: "POST",
     credentials: "include",
