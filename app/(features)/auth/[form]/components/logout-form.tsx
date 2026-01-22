@@ -9,6 +9,7 @@ import {
 import { logoutOnServer } from "@/lib/api/requests/auth.requests";
 import { useAuthStore } from "@/store/AuthStore";
 import { useRouter } from "next/navigation";
+import { COURSES_URL } from "@/urls/courses";
 
 export function LogoutForm() {
   const logout = useAuthStore((state) => state.logout);
@@ -40,9 +41,9 @@ export function LogoutForm() {
           >
             Так
           </Button>
-          <Button className="cursor-pointer">
-            <Link href="/courses">Ні</Link>
-          </Button>
+          <Link href={COURSES_URL.courses_page}>
+            <Button className="cursor-pointer">Ні</Button>
+          </Link>
         </div>
       </Card>
     </div>
