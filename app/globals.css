@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@400;600&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @theme {
-  --font-heading:"Montserrat", sans-serif;
+  --font-heading: "Montserrat", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-accent: "Poppins", sans-serif;
-};
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -120,7 +119,6 @@
   --sidebar-ring: oklch(0.38 0.189 293.745);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -130,7 +128,7 @@
   }
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
@@ -139,26 +137,29 @@ a:hover,
 a:focus,
 a:active,
 a:visited {
-  color: inherit;           /* або ваш колір */
+  color: inherit; /* або ваш колір */
   text-decoration: none;
-  outline: none;            /* прибирає контур при фокусі (див. accessibility) */
+  outline: none; /* прибирає контур при фокусі (див. accessibility) */
 }
 
-
-@keyframes fadeIn{
-  from { opacity: 0;}
-  to { opacity: 1;}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.animate-fadeIn{
+.animate-fadeIn {
   animation: fadeIn 2s ease-out;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 5px;
   background-color: var(--color-neutral-900);
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: var(--color-purple-500);
 }

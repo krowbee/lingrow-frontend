@@ -8,7 +8,7 @@ export const HeroSection = (): JSX.Element => {
     <div className="hero relative w-full h-screen before:absolute before:w-full before:h-full before:inset-0 before:z-0 before:bg-black/70 bg-cover bg-no-repeat bg-center bg-[url(/lingrow-hero-small.png)] lg:bg-[url(/lingrow-logo.png)]">
       <header className="fixed flex flex-row backdrop-blur-sm items-center z-50 shadow-[0_0_10px_rgba(0,0,0,0.2)] justify-between top-0 w-full bg-transparent text-white p-6">
         <Link href="/">
-          <h1 className="font-heading text-3xl text-secondary transition duration-700 ease-in-out group">
+          <h1 className="font-heading text-3xl  transition duration-700 ease-in-out group">
             LIN
             <span className="transition duration-700 ease-in-out group-hover:text-primary">
               GROW
@@ -39,17 +39,14 @@ export const HeroSection = (): JSX.Element => {
         </div>
       </header>
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center cursor-default animate-fadeIn gap-4">
-        <h1 className="font-heading text-5xl lg:text-6xl text-secondary tracking-wide text-center">
+        <h1 className="font-heading text-5xl lg:text-6xl tracking-wide text-center">
           Мова відкриває світ
         </h1>
-        <p className="font-body text-lg text-secondary text-center">
+        <p className="font-body text-lg text-center">
           Почни сьогодні — майбутнє говорить англійською.
         </p>
         <Link href={AUTH_URLS.signup}>
-          <Button
-            variant="ghost"
-            className="text-purple-300 text-center mt-10 border border-purple-500 text-3xl py-6 px-10 md:px-20 hover:bg-purple-500 hover:text-white cursor-pointer font-heading font-extralight duration-500"
-          >
+          <Button className="bg-transparent text-purple-300 text-center mt-10 border border-purple-500 text-3xl py-6 px-10 md:px-20 hover:bg-purple-500 hover:text-white cursor-pointer font-heading font-extralight duration-500">
             Приєднатись
           </Button>
         </Link>
