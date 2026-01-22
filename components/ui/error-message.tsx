@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utills";
+import { cn } from "@/lib/utils";
 
 type ErrorMessageProps = React.ComponentProps<"p"> & { message?: string };
 
