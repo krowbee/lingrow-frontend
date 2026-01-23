@@ -28,6 +28,7 @@ import { ErrorMessage } from "../../../../../components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
 import { loginOnServer } from "@/lib/api/requests/auth.requests";
 import { useAuthStore } from "../../../../../store/AuthStore";
+import { useRouter } from "next/navigation";
 export function LoginForm({
   className,
   ...props
@@ -44,6 +45,7 @@ export function LoginForm({
     },
     resolver: zodResolver(LoginSchema),
   });
+  const router = useRouter();
 
   const login = useAuthStore((state) => state.login);
 
@@ -54,8 +56,7 @@ export function LoginForm({
       return;
     }
     login(result.data);
-    console.log("Loggined in");
-    console.log(result.data);
+    router.push("/courses");
   };
 
   return (

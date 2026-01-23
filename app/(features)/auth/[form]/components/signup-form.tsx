@@ -25,6 +25,8 @@ import {
 import { ErrorMessage } from "../../../../../components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
 import { registerOnServer } from "@/lib/api/requests/auth.requests";
+import { useAuthStore } from "@/store/AuthStore";
+import { useRouter } from "next/navigation";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const {
@@ -40,6 +42,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
     resolver: zodResolver(RegisterSchema),
   });
+  const login = useAuthStore((state) => state.login);
+  const router = useRouter();
 
   const onSubmit = async (data: RegisterFormData) => {
     const result = await registerOnServer(data);
@@ -47,8 +51,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       setError("root", { message: result.error });
       return;
     }
-    console.log("Signed up");
-    console.log(result.data);
+    login(result.data);
+    router.push("/courses");
   };
 
   return (
