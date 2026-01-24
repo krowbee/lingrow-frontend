@@ -7,8 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
+import { Course } from "../../../../types/course/course";
+import Link from "next/link";
+import { COURSES_URL } from "@/urls/courses";
 
-export function CourseCard() {
+export function CourseCard({ course }: { course: Course }) {
   return (
     <Card className="relative w-full h-min max-w-sm pt-0 overflow-hidden bg-neutral-800 border-none">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
@@ -20,16 +23,18 @@ export function CourseCard() {
         height={400}
       />
       <CardHeader>
-        <CardTitle className="font-accent">English A1 Level</CardTitle>
+        <CardTitle className="font-accent">{course.name}</CardTitle>
         <CardDescription className="font-body">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime,
-          reiciendis ea, voluptas laboriosam minima exercitationem sint id sunt
-          autem ducimus necessitatibus ab quos doloremque culpa repudiandae eius
-          iure obcaecati dolores.
+          {course.description}
         </CardDescription>
       </CardHeader>
       <CardFooter className="justify-center">
-        <Button className="w-full max-w-[50%]">Вчитись</Button>
+        <Link
+          className=" cursor-pointer max-w-[50%]"
+          href={`${COURSES_URL.courses_page}/${course.slug}`}
+        >
+          <Button className="w-full cursor-pointer">Вчитись</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

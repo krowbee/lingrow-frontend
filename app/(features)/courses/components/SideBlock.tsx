@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/sidebar";
 import { ProfileBlock } from "./ProfileBlock";
 import { CoursesSide } from "./CoursesSide";
+import { Course } from "@/types/course/course";
 
-export function SideBlock() {
+export function SideBlock({ courses }: { courses: Course[] }) {
   return (
     <SidebarProvider className="w-min">
       <Sidebar className="py-4">
@@ -19,7 +20,7 @@ export function SideBlock() {
           </div>
         </SidebarHeader>
         <SidebarContent>
-          <CoursesSide />
+          <CoursesSide courses={courses} />
         </SidebarContent>
         <SidebarFooter>
           <ProfileBlock />
