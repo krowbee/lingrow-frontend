@@ -1,21 +1,21 @@
 import { TaskWithAnswers } from "@/types/course/course";
-import { Step } from "./LessonBlock";
 import { Button } from "@/components/ui/button";
+import { useLessonStore } from "@/store/LessonStore";
 
-type Props = {
-  tasks: TaskWithAnswers[];
-  step: "theory" | "task";
-  setStep: (step: Step) => void;
-  taskIndex: number;
-  setTaskIndex: (index: number) => void;
-};
 export function LessonNavigation({
   tasks,
-  step,
-  setStep,
-  taskIndex,
-  setTaskIndex,
-}: Props) {
+  finishLesson,
+  backToLessons,
+}: {
+  tasks: TaskWithAnswers[];
+  finishLesson: () => void;
+  backToLessons: () => void;
+}) {
+  const step = useLessonStore((state) => state.step);
+  const setStep = useLessonStore((state) => state.setStep);
+  const taskIndex = useLessonStore((state) => state.taskIndex);
+  const setTaskIndex = useLessonStore((state) => state.setTaskIndex);
+
   const chooseTask = (taskOrder: number) => {
     if (taskOrder < 1 || taskOrder > tasks.length) return;
     setStep("task");
@@ -52,12 +52,19 @@ export function LessonNavigation({
   };
   return (
     <div className="w-full flex px-8 justify-center gap-2">
-      <Button onClick={() => changeTask("prev")} className="cursor-pointer">
-        Назад
-      </Button>
-      <div className="flex flex-row gap-2 justify-center">
+      {step === "task" ? (
+        <Button onClick={() => changeTask("prev")} className="cursor-pointer">
+          Назад
+        </Button>
+      ) : (
+        <Button className="cursor-pointer" onClick={() => backToLessons()}>
+          До уроків
+        </Button>
+      )}
+
+      <div className="flex flex-row flex-wrap gap-2 justify-center">
         <Button
-          className={`${step === "theory" && "bg-accent"} cursor-pointer`}
+          className={`bg-accent ${step === "theory" && "bg-primary"}  cursor-pointer`}
           onClick={() => chooseTheory()}
         >
           Теорія
@@ -65,16 +72,22 @@ export function LessonNavigation({
         {tasks.map((task) => (
           <Button
             key={task.id}
-            className={`cursor-pointer ${task.order - 1 === taskIndex && step === "task" && "bg-accent"}`}
+            className={`cursor-pointer bg-accent ${task.order - 1 === taskIndex && step === "task" && "bg-primary"} ${task.choosedAnswer && "bg-green-400"}`}
             onClick={() => chooseTask(task.order)}
           >
             {task.order}
           </Button>
         ))}
       </div>
-      <Button onClick={() => changeTask("next")} className="cursor-pointer">
-        Далі
-      </Button>
+      {taskIndex + 1 !== tasks.length ? (
+        <Button onClick={() => changeTask("next")} className="cursor-pointer">
+          Далі
+        </Button>
+      ) : (
+        <Button className="cursor-pointer" onClick={() => finishLesson()}>
+          Завершити
+        </Button>
+      )}
     </div>
   );
 }

@@ -35,7 +35,7 @@ export type TaskWithAnswers = {
   answers: Answer[];
   lessonId: number;
   order: number;
-  isCompleted: boolean;
+  choosedAnswer: number | null;
 };
 
 export type Answer = {

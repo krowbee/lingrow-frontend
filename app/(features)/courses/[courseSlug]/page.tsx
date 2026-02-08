@@ -1,5 +1,5 @@
 import { getStaticLessonsList } from "@/lib/api/requests/courses.requests";
-import { LessonsContainer } from "./components/LessonBlock";
+import { LessonsContainer } from "./components/LessonContainer";
 
 export default async function CourseLessonsPage({
   params,

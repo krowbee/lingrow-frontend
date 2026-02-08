@@ -2,17 +2,32 @@
 import { useEffect, useState } from "react";
 import { TheoryBlock } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
-import { LessonWithTasks } from "@/types/course/course";
 import { Spinner } from "@/components/ui/spinner";
 import { TaskBlock } from "./TaskBlock";
 import { LessonNavigation } from "./LessonNavigation";
+import { useLessonStore } from "@/store/LessonStore";
+import { useRouter } from "next/navigation";
+import { COURSES_URL } from "@/urls/courses";
 
 export type Step = "theory" | "task";
-export function LessonBlock({ lessonSlug }: { lessonSlug: string }) {
-  const [lesson, setLesson] = useState<LessonWithTasks>();
-  const [step, setStep] = useState<Step>("theory");
-  const [taskIndex, setTaskIndex] = useState(0);
-
+export function LessonBlock({
+  lessonSlug,
+  courseSlug,
+}: {
+  lessonSlug: string;
+  courseSlug: string;
+}) {
+  const setLesson = useLessonStore((state) => state.setLesson);
+  const lesson = useLessonStore((state) => state.lesson);
+  const step = useLessonStore((state) => state.step);
+  const taskIndex = useLessonStore((state) => state.taskIndex);
+  const router = useRouter();
+  const finishLesson = () => {
+    router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
+  };
+  const backToLessons = () => {
+    router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
+  };
   useEffect(() => {
     const getLesson = async () => {
       const result = await getLessonWithProgress(lessonSlug);
@@ -23,7 +38,7 @@ export function LessonBlock({ lessonSlug }: { lessonSlug: string }) {
       setLesson(result.data);
     };
     getLesson();
-  }, [lessonSlug]);
+  }, [lessonSlug, setLesson]);
 
   if (!lesson)
     return (
@@ -33,17 +48,17 @@ export function LessonBlock({ lessonSlug }: { lessonSlug: string }) {
     );
 
   return (
-    <div className="lesson-container w-full flex flex-col justify-center p-4">
-      {step === "theory" && <TheoryBlock theory={lesson.theory} />}
+    <div className="lesson-container w-full flex flex-col justify-center gap-4 p-4">
+      {step === "theory" && (
+        <TheoryBlock lessonName={lesson.name} theory={lesson.theory} />
+      )}
       {step === "task" && (
         <TaskBlock task={lesson.tasks[taskIndex]}></TaskBlock>
       )}
       <LessonNavigation
-        step={step}
-        setStep={setStep}
         tasks={lesson.tasks}
-        taskIndex={taskIndex}
-        setTaskIndex={setTaskIndex}
+        finishLesson={finishLesson}
+        backToLessons={backToLessons}
       />
     </div>
   );

@@ -26,3 +26,25 @@ export async function getLessonWithProgress(
   }
   return { ok: true, data: data.lesson };
 }
+
+export async function updateTaskProgress(
+  taskId: number,
+  answerId: number,
+  hasProgress: boolean,
+) {
+  const url = hasProgress
+    ? `${API_URL}/progress/${taskId}`
+    : `${API_URL}/progress`;
+  const res = await fetchToApi(url, {
+    method: hasProgress ? "PATCH" : "POST",
+    body: JSON.stringify({
+      ...(hasProgress ? {} : { taskId }),
+      answerId,
+    }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    return { ok: false, error: data.message };
+  }
+  return { ok: true, data };
+}
