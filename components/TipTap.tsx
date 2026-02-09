@@ -4,11 +4,19 @@ import StarterKit from "@tiptap/starter-kit";
 
 import { TextStyleKit } from "@tiptap/extension-text-style";
 import { MenuBar } from "./MenuBar";
-export const Tiptap = ({ editable }: { editable: boolean }) => {
+export const Tiptap = ({
+  editable,
+  content,
+}: {
+  editable: boolean;
+  content?: string;
+}) => {
   const extensions = [StarterKit, TextStyleKit];
   const editor = new Editor({
     extensions: extensions,
-    content: `<h1>Hi guys! it's my first english lesson! I really wanna teach you something interesting!</h1>
+    content:
+      content ||
+      `<h1>Hi guys! it's my first english lesson! I really wanna teach you something interesting!</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur temporibus dignissimos mollitia necessitatibus quis laborum laboriosam! Qui, fugiat dignissimos delectus aliquid voluptate a earum iure nobis illum nulla corporis consequatur.</p>`,
     editable: editable,
   });

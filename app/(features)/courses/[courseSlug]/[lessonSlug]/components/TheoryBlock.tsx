@@ -17,7 +17,7 @@ export function TheoryBlock({
       </CardHeader>
       <hr className="bg-primary"></hr>
       <CardDescription>
-        <Tiptap editable={false} />
+        <Tiptap editable={false} content={theory} />
       </CardDescription>
     </Card>
   );
