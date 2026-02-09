@@ -172,3 +172,20 @@ a:visited {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.button-group button {
+  min-width: 3em;
+  padding: 5px 5px;
+  border: solid 1px grey;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+.button-group button.is-active {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
