@@ -1,30 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AUTH_URLS } from "./urls/auth";
-import { COURSES_URL } from "./urls/courses";
-
-type Rule = {
-  match: string[];
-  guestOnly?: boolean;
-  authOnly?: boolean;
-  redirectTo: string;
-};
-
-const rules: Rule[] = [
-  {
-    match: [AUTH_URLS.login, AUTH_URLS.signup],
-    guestOnly: true,
-    redirectTo: COURSES_URL.courses_page,
-  },
-  {
-    match: [AUTH_URLS.logout, COURSES_URL.courses_page],
-    authOnly: true,
-    redirectTo: AUTH_URLS.login,
-  },
-];
-
-const matchPrefix = (path: string, prefixes: string[]) => {
-  return prefixes.some((p) => path === p || path.startsWith(p + "/"));
-};
+import { matchPrefix, rules } from "./urlRules";
 
 export async function proxy(req: NextRequest) {
   const isAuth = req.cookies.has("refreshToken");
