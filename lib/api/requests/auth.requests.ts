@@ -7,7 +7,6 @@ import { API_URL } from "../constants";
 import { ApiResult } from "@/types/api/api-result.type";
 import { User } from "@/types/auth/user";
 import { fetchToApi } from "../fetchWithRefresh";
-import { error } from "console";
 
 export async function loginOnServer(
   formData: LoginFormData,
