@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TheoryBlock } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
 import { Spinner } from "@/components/ui/spinner";
