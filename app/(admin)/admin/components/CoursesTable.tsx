@@ -36,7 +36,7 @@ export function CoursesTable() {
     <Card className="w-max  rounded-none h-64 py-2">
       <CardHeader className="font-heading text-center">Курси</CardHeader>
 
-      <CardContent className="w-full flex flex-col items-center p-0 gap-1 overflow-y-auto hide-scrollbar">
+      <CardContent className="w-full flex flex-col items-center justify-center p-0 gap-1 overflow-y-auto hide-scrollbar">
         {loading ? (
           <Spinner />
         ) : error ? (
@@ -45,7 +45,7 @@ export function CoursesTable() {
           courses.map((course) => (
             <div
               key={course.id}
-              className="w-full px-2  cursor-pointer  py-1  bg-muted hover:bg-muted/50"
+              className="w-full flex px-2  cursor-pointer  py-1  bg-muted hover:bg-muted/50"
               onClick={() => chooseCourse(course)}
             >
               {course.name}

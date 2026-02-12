@@ -50,9 +50,12 @@ export function LessonsTable() {
             <Link
               href={`${ADMIN_URL.adminPage}/${currentCourse.slug}/${lesson.slug}`}
               key={lesson.id}
+              className="w-full text-center"
             >
               <div className="w-full px-4  flex items-center justify-center cursor-pointer  py-1  bg-muted hover:bg-muted/50">
-                <span className="font-accent truncate">{lesson.name}</span>
+                <span className="font-accent truncate w-full">
+                  {lesson.name}
+                </span>
               </div>
             </Link>
           ))
