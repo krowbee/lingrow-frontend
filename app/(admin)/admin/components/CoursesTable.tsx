@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
@@ -60,7 +59,7 @@ export function CoursesTable() {
         )}
       </CardContent>
       <CardFooter className="flex w-full justify-center">
-        <button className="font-accent flex text-xl cursor-pointer text-secondary hover:text-primary transition-colours duration-300 rounded-full border hover:border-primary px-2">
+        <button className="font-accent flex cursor-pointer text-secondary hover:text-primary transition-colours duration-300 rounded-full border hover:border-primary px-2">
           +
         </button>
       </CardFooter>
