@@ -1,16 +1,15 @@
 "use client";
-import DOMPurify from "dompurify";
 import { Tiptap } from "@/components/TipTap";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+import { JSONContent } from "@tiptap/react";
 
 export function TheoryBlock({
   lessonName,
   theory,
 }: {
   lessonName: string;
-  theory: string;
+  theory: JSONContent;
 }) {
-  const cleanedTheory = DOMPurify.sanitize(theory);
   return (
     <Card className="w-full px-8 py-4">
       <CardHeader>
@@ -18,7 +17,7 @@ export function TheoryBlock({
       </CardHeader>
       <hr className="bg-primary"></hr>
       <CardDescription>
-        <Tiptap editable={false} content={cleanedTheory} />
+        <Tiptap editable={false} content={theory} />
       </CardDescription>
     </Card>
   );

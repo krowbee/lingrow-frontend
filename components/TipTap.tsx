@@ -1,5 +1,5 @@
 "use client";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, JSONContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
 import { TextStyleKit } from "@tiptap/extension-text-style";
@@ -7,9 +7,11 @@ import { MenuBar } from "./MenuBar";
 export const Tiptap = ({
   editable,
   content,
+  setText,
 }: {
   editable: boolean;
-  content?: string;
+  content?: JSONContent;
+  setText?: (text: JSONContent | null) => void;
 }) => {
   const extensions = [StarterKit, TextStyleKit];
   const editor = useEditor({
@@ -20,6 +22,9 @@ export const Tiptap = ({
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur temporibus dignissimos mollitia necessitatibus quis laborum laboriosam! Qui, fugiat dignissimos delectus aliquid voluptate a earum iure nobis illum nulla corporis consequatur.</p>`,
     editable: editable,
     immediatelyRender: false,
+    onUpdate({ editor }) {
+      setText?.(editor.getJSON());
+    },
   });
   if (!editor) return;
   return (

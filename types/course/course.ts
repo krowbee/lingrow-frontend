@@ -1,3 +1,5 @@
+import { JSONContent } from "@tiptap/react";
+
 export type Course = {
   id: number;
   slug: string;
@@ -22,7 +24,7 @@ export type LessonProgress = {
 export type LessonWithTasks = {
   id: number;
   name: string;
-  theory: string;
+  theory: JSONContent;
   slug: string;
   tasks: TaskWithAnswers[];
   order: number;
