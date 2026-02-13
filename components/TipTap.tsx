@@ -11,7 +11,7 @@ export const Tiptap = ({
 }: {
   editable: boolean;
   content?: JSONContent;
-  setText?: (text: JSONContent | null) => void;
+  setText?: (text: JSONContent) => void;
 }) => {
   const extensions = [StarterKit, TextStyleKit];
   const editor = useEditor({
